@@ -9,3 +9,9 @@ git push -u origin main
 git remote add origin https://github.com/agora2696/Calificaciones.git
 git branch -M main
 git push -u origin main
+
+ @foreach ($collectionGroup as $item)
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-2">{{$item->$grupo}}</h6>
+                        </div>
+                        @endforeach
