@@ -38,4 +38,26 @@ class HomeController extends Controller
         
         return view('pages.dashboard', ['collection'=>$collection['alumnos']], ['grupos'=>$groups]);
     }
+
+    public function show($id)
+    {
+        $collectionStudents = Http::get('https://acs-hc-api-production.up.railway.app/api/alumno/'.$id)->collect('alumno');
+        $students=[];
+        foreach($collectionStudents as $item => $val){
+            $students=[
+                'matricula' => $collectionStudents['matricula'],
+                'nombreCompleto' => $collectionStudents['nombreCompleto'],
+                'foto' => $collectionStudents['foto']
+            ];
+        }
+        $photos=[];
+        foreach($collectionStudents as $item => $val){
+            $photos=[
+                'foto' => $collectionStudents['foto']
+            ];
+        }
+        //dd($students);
+        return view('pages.student', ['estudiantes'=>$students], ['fotos'=>$photos]);
+    }
 }
+
